@@ -2,7 +2,43 @@
 
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Newest first.
 
+## [0.1.20] - 2026-04-18
+
+- JVM CPU: sparkline scale near 0%, canvas/chip layout, dock spacing and contrast.
+- Discover busy: circular progress on button + busy row (replaces spinning search icon).
+
+## [0.1.19] - 2026-04-18
+
+- **JVM CPU** dock: `jps` list, CPU %, aggregate sparkline; polls while panel visible; `jps` from JDK for Gradle → `JAVA_HOME` → `PATH`.
+
+## [0.1.18] - 2026-04-18
+
+- Default **isolated `GRADLE_USER_HOME`**, optional custom path; **Stop Gradle daemons** + idle `--stop` after N minutes; settings for window close / toast / log.
+- **Codicons** and editor title order; panel + **Logcat** use inline SVG icons.
+
+## [0.1.17] - 2026-04-18
+
+- Marketplace **categories**: Programming Languages, Debuggers (was Other).
+
+## [0.1.16] - 2026-04-18
+
+- New marketplace icon; generate scripts; high-res source not in VSIX.
+
+## [0.1.15] - 2026-04-17
+
+### Added
+
+- Panel **Settings** (gear): pick **JDK for Gradle** — scans installed JDKs, updates **`android-ide-extension.gradleJavaHome`** (workspace or user). **Android: Panel settings (JDK for Gradle)** command.
+- **MIT LICENSE** in the repository root.
+
+### Changed
+
+- **Discover variants** failures: compact **Retry** row plus full details in **System Gradle Log** (no long inline error in the panel).
+- **README** overhaul (overview hero, capability tables, GitHub-hosted **overview** screenshot); retired older multi-screenshot set.
+
 ## [0.1.14] - 2026-04-17
+
+### Changed
 
 - Disable **Cache APK on Compile / Install** while Gradle runs or variants are discovering (same as toolbar); dimmed when disabled.
 
@@ -68,6 +104,12 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Newest first.
 
 - Initial baseline before marketplace identity changes.
 
+[0.1.20]: https://github.com/cuongnv126/android-ide-extension/compare/v0.1.19...v0.1.20
+[0.1.19]: https://github.com/cuongnv126/android-ide-extension/compare/v0.1.18...v0.1.19
+[0.1.18]: https://github.com/cuongnv126/android-ide-extension/compare/v0.1.17...v0.1.18
+[0.1.17]: https://github.com/cuongnv126/android-ide-extension/compare/v0.1.16...v0.1.17
+[0.1.16]: https://github.com/cuongnv126/android-ide-extension/compare/v0.1.15...v0.1.16
+[0.1.15]: https://github.com/cuongnv126/android-ide-extension/compare/v0.1.14...v0.1.15
 [0.1.14]: https://github.com/cuongnv126/android-ide-extension/compare/v0.1.13...v0.1.14
 [0.1.13]: https://github.com/cuongnv126/android-ide-extension/compare/v0.1.12...v0.1.13
 [0.1.12]: https://github.com/cuongnv126/android-ide-extension/compare/v0.1.11...v0.1.12
