@@ -46,3 +46,20 @@
     root.classList.add("agt-motion-done");
   });
 })();
+
+// Arsenal horizontal scroll — fade edge indicators
+(function () {
+  const grid = document.querySelector(".grid--arsenal");
+  const wrap = document.querySelector(".arsenal-scroll-wrap");
+  if (!grid || !wrap) return;
+
+  function update() {
+    const { scrollLeft, scrollWidth, clientWidth } = grid;
+    wrap.classList.toggle("can-scroll-left", scrollLeft > 4);
+    wrap.classList.toggle("can-scroll-right", scrollLeft < scrollWidth - clientWidth - 4);
+  }
+
+  grid.addEventListener("scroll", update, { passive: true });
+  new ResizeObserver(update).observe(grid);
+  update();
+})();
