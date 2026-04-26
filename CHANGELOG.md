@@ -2,6 +2,27 @@
 
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Newest first.
 
+## [0.1.33] - 2026-04-26
+
+- **Repository moved to the [AndroidGradleTools](https://github.com/AndroidGradleTools) GitHub organization.** Source, screenshots, the in-panel **Wireless** guide links, and the in-extension `adb-relay-android` APK download URL all point at the new org. Sibling projects ([adb-relay-jvm](https://github.com/AndroidGradleTools/adb-relay-jvm), [adb-relay-android](https://github.com/AndroidGradleTools/adb-relay-android)) moved together. No code or behavior changes — pure org migration.
+
+## [0.1.32] - 2026-04-26
+
+- **Webview assets minified via esbuild:** moved JS/CSS source to `webview/`; `media/*.{js,css}` are now build artifacts (gitignored). Total payload **218.7 KB → 138.8 KB** (~37% smaller). Build hooks: `build:media`, `watch:media`, plus auto-run on `compile`/`vscode:prepublish`/`postinstall`.
+
+## [0.1.31] - 2026-04-26
+
+- **Settings overlay:** master-detail layout with icon'd group list (Android-17 style). All ~20 extension configs editable in-panel — was 3. Per-row reset (↺) to package.json default; bottom links to Wireless guide + native VS Code Settings.
+- **Wireless header:** chevron back + left-aligned title (matches Settings detail). Entered from Settings → back returns there, **×** hidden.
+- **Device pill — live status dot** (mirrors Logcat): green = adb-online, red = offline/unauthorized, amber = AVD not yet running, muted = none. Cached `adb devices` (1.5s TTL); panel re-renders on device set change so the dot stays current after plug/unplug.
+
+## [0.1.30] - 2026-04-26
+
+- **Crash reporter:** when our code throws an unexpected error, a notification offers **Report** / **Show log** / **Dismiss**. **Report** opens a webpage with the sanitized payload pre-filled — nothing leaves your machine until you press Submit. Disable with `android-ide-extension.crashReportEnabled = false`.
+- **Android Errors** output channel logs every caught error regardless of whether a notification was shown.
+- **Bug-only filter:** Gradle, ADB, missing-device, and config failures never trigger a crash report — only errors classified as extension bugs do.
+- **Bundled VSIX** via esbuild multi-entry with lazy chunks (signing, debug attach, remote ADB): **175 → 24 files**, **318 KB → 205 KB**.
+
 ## [0.1.29] - 2026-04-25
 
 - **Sign chip** in the Build card header — switch keystore per build. **Default** = Gradle's own signing; saved signatures inject `-Pandroid.injected.signing.*` at build time.
@@ -55,7 +76,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Newest first.
 
 - **Wireless Remote ADB** re-enabled: panel tabs (Same Wi-Fi / Internet relay / VPN/mesh) are now visible by default.
 - **Internet relay — Install APK:** device picker with **Refresh** + **Install APK** button; inline status feedback; downloads and installs `adb-relay-android` directly from the IDE.
-- Removed bundled `tools/remote-adb-relay/relay.cjs`; relay host is now the standalone **[adb-relay-jvm](https://github.com/cuongnv126/adb-relay-jvm)**.
+- Removed bundled `tools/remote-adb-relay/relay.cjs`; relay host is now the standalone **[adb-relay-jvm](https://github.com/AndroidGradleTools/adb-relay-jvm)**.
 - **Debug:** `DebugAdapterDescriptorFactory` is now registered lazily — only when the user first clicks **Attach debug** — fixing "can only be registered once" errors on extension reload.
 - **Debug:** Removed **EXP** badge from the Attach debug toolbar button; tooltip still says "experimental".
 - **Internet relay:** Removed the **Copy config** snippet and button from the ADB Relay step.
@@ -95,19 +116,12 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Newest first.
 
 ## [0.1.15] - 2026-04-17
 
-### Added
-
 - Panel **Settings** (gear): pick **JDK for Gradle** — scans installed JDKs, updates **`android-ide-extension.gradleJavaHome`** (workspace or user). **Android: Panel settings (JDK for Gradle)** command.
 - **MIT LICENSE** in the repository root.
-
-### Changed
-
 - **Discover variants** failures: compact **Retry** row plus full details in **System Gradle Log** (no long inline error in the panel).
 - **README** overhaul (overview hero, capability tables, GitHub-hosted **overview** screenshot); retired older multi-screenshot set.
 
 ## [0.1.14] - 2026-04-17
-
-### Changed
 
 - Disable **Cache APK on Compile / Install** while Gradle runs or variants are discovering (same as toolbar); dimmed when disabled.
 
@@ -173,28 +187,29 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Newest first.
 
 - Initial baseline before marketplace identity changes.
 
-[0.1.26]: https://github.com/cuongnv126/android-ide-extension/compare/v0.1.25...v0.1.26
-[0.1.25]: https://github.com/cuongnv126/android-ide-extension/compare/v0.1.24...v0.1.25
-[0.1.24]: https://github.com/cuongnv126/android-ide-extension/compare/v0.1.23...v0.1.24
-[0.1.23]: https://github.com/cuongnv126/android-ide-extension/compare/v0.1.22...v0.1.23
-[0.1.22]: https://github.com/cuongnv126/android-ide-extension/compare/v0.1.21...v0.1.22
-[0.1.21]: https://github.com/cuongnv126/android-ide-extension/compare/v0.1.20...v0.1.21
-[0.1.20]: https://github.com/cuongnv126/android-ide-extension/compare/v0.1.19...v0.1.20
-[0.1.19]: https://github.com/cuongnv126/android-ide-extension/compare/v0.1.18...v0.1.19
-[0.1.18]: https://github.com/cuongnv126/android-ide-extension/compare/v0.1.17...v0.1.18
-[0.1.17]: https://github.com/cuongnv126/android-ide-extension/compare/v0.1.16...v0.1.17
-[0.1.16]: https://github.com/cuongnv126/android-ide-extension/compare/v0.1.15...v0.1.16
-[0.1.15]: https://github.com/cuongnv126/android-ide-extension/compare/v0.1.14...v0.1.15
-[0.1.14]: https://github.com/cuongnv126/android-ide-extension/compare/v0.1.13...v0.1.14
-[0.1.13]: https://github.com/cuongnv126/android-ide-extension/compare/v0.1.12...v0.1.13
-[0.1.12]: https://github.com/cuongnv126/android-ide-extension/compare/v0.1.11...v0.1.12
-[0.1.11]: https://github.com/cuongnv126/android-ide-extension/compare/v0.1.10...v0.1.11
-[0.1.10]: https://github.com/cuongnv126/android-ide-extension/compare/v0.1.9...v0.1.10
-[0.1.9]: https://github.com/cuongnv126/android-ide-extension/compare/v0.1.8...v0.1.9
-[0.1.8]: https://github.com/cuongnv126/android-ide-extension/compare/v0.1.7...v0.1.8
-[0.1.7]: https://github.com/cuongnv126/android-ide-extension/compare/v0.1.6...v0.1.7
-[0.1.6]: https://github.com/cuongnv126/android-ide-extension/compare/v0.1.5...v0.1.6
-[0.1.5]: https://github.com/cuongnv126/android-ide-extension/compare/v0.1.4...v0.1.5
-[0.1.4]: https://github.com/cuongnv126/android-ide-extension/compare/v0.1.3...v0.1.4
-[0.1.3]: https://github.com/cuongnv126/android-ide-extension/compare/v0.1.2...v0.1.3
-[0.1.2]: https://github.com/cuongnv126/android-ide-extension/releases/tag/v0.1.2
+[0.1.33]: https://github.com/AndroidGradleTools/android-ide-extension/compare/v0.1.32...v0.1.33
+[0.1.26]: https://github.com/AndroidGradleTools/android-ide-extension/compare/v0.1.25...v0.1.26
+[0.1.25]: https://github.com/AndroidGradleTools/android-ide-extension/compare/v0.1.24...v0.1.25
+[0.1.24]: https://github.com/AndroidGradleTools/android-ide-extension/compare/v0.1.23...v0.1.24
+[0.1.23]: https://github.com/AndroidGradleTools/android-ide-extension/compare/v0.1.22...v0.1.23
+[0.1.22]: https://github.com/AndroidGradleTools/android-ide-extension/compare/v0.1.21...v0.1.22
+[0.1.21]: https://github.com/AndroidGradleTools/android-ide-extension/compare/v0.1.20...v0.1.21
+[0.1.20]: https://github.com/AndroidGradleTools/android-ide-extension/compare/v0.1.19...v0.1.20
+[0.1.19]: https://github.com/AndroidGradleTools/android-ide-extension/compare/v0.1.18...v0.1.19
+[0.1.18]: https://github.com/AndroidGradleTools/android-ide-extension/compare/v0.1.17...v0.1.18
+[0.1.17]: https://github.com/AndroidGradleTools/android-ide-extension/compare/v0.1.16...v0.1.17
+[0.1.16]: https://github.com/AndroidGradleTools/android-ide-extension/compare/v0.1.15...v0.1.16
+[0.1.15]: https://github.com/AndroidGradleTools/android-ide-extension/compare/v0.1.14...v0.1.15
+[0.1.14]: https://github.com/AndroidGradleTools/android-ide-extension/compare/v0.1.13...v0.1.14
+[0.1.13]: https://github.com/AndroidGradleTools/android-ide-extension/compare/v0.1.12...v0.1.13
+[0.1.12]: https://github.com/AndroidGradleTools/android-ide-extension/compare/v0.1.11...v0.1.12
+[0.1.11]: https://github.com/AndroidGradleTools/android-ide-extension/compare/v0.1.10...v0.1.11
+[0.1.10]: https://github.com/AndroidGradleTools/android-ide-extension/compare/v0.1.9...v0.1.10
+[0.1.9]: https://github.com/AndroidGradleTools/android-ide-extension/compare/v0.1.8...v0.1.9
+[0.1.8]: https://github.com/AndroidGradleTools/android-ide-extension/compare/v0.1.7...v0.1.8
+[0.1.7]: https://github.com/AndroidGradleTools/android-ide-extension/compare/v0.1.6...v0.1.7
+[0.1.6]: https://github.com/AndroidGradleTools/android-ide-extension/compare/v0.1.5...v0.1.6
+[0.1.5]: https://github.com/AndroidGradleTools/android-ide-extension/compare/v0.1.4...v0.1.5
+[0.1.4]: https://github.com/AndroidGradleTools/android-ide-extension/compare/v0.1.3...v0.1.4
+[0.1.3]: https://github.com/AndroidGradleTools/android-ide-extension/compare/v0.1.2...v0.1.3
+[0.1.2]: https://github.com/AndroidGradleTools/android-ide-extension/releases/tag/v0.1.2

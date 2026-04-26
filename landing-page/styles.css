@@ -1051,7 +1051,8 @@ body {
   }
 
   .ide-window__tabstrip {
-    min-height: 28px;
+    min-height: 34px;
+    padding-top: 0.3rem;
   }
 
   .ide-window__body {
