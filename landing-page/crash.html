@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f4f6f9" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Report a crash — Android Gradle Tools</title>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="crash.css" />
+  </head>
+  <body>
+    <div class="page-bg" aria-hidden="true">
+      <div class="page-bg__base"></div>
+      <div class="page-bg__bloom page-bg__bloom--blue"></div>
+      <div class="page-bg__bloom page-bg__bloom--green"></div>
+      <div class="page-bg__vignette"></div>
+    </div>
+
+    <header class="site-top">
+      <nav class="site-nav wrap" aria-label="Primary">
+        <a class="site-nav__brand" href="/">
+          <span class="icon icon--nav icon--ad" aria-hidden="true">android</span>
+          Android Gradle Tools
+        </a>
+        <div class="crash-nav-links">
+          <a class="crash-nav-links__link" href="/">Home</a>
+          <a class="crash-nav-links__link" href="https://github.com/cuongnv126/android-ide-extension" rel="noopener noreferrer">GitHub</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="crash-main">
+      <section id="error-fallback" class="crash-fallback" hidden>
+        <div class="wrap crash-wrap">
+          <span class="crash-fallback__icon" aria-hidden="true">link_off</span>
+          <p class="crash-fallback__eyebrow">Invalid crash link</p>
+          <h1 class="crash-fallback__title">Something went wrong</h1>
+          <p class="crash-fallback__lead">
+            We couldn't read the crash report from this link. It may have been truncated, edited, or expired.
+          </p>
+          <a class="button button--primary crash-btn crash-fallback__cta" href="/">
+            <span class="icon icon--btn" aria-hidden="true">home</span>
+            <span>Back to home</span>
+          </a>
+        </div>
+      </section>
+
+      <div class="wrap crash-wrap">
+        <p class="crash-eyebrow">Crash report</p>
+        <h1 class="crash-title">Send what we caught.</h1>
+        <p class="crash-lead">
+          The extension intercepted an unexpected error and prepared a sanitized report below.
+          Add an optional note, then submit.
+          <strong>Nothing leaves your machine until you press Submit.</strong>
+        </p>
+
+        <blockquote id="error-summary" class="crash-summary" hidden>
+          <span class="crash-summary__mark" aria-hidden="true">format_quote</span>
+          <span id="summary-name" class="crash-summary__name"></span>
+          <span id="summary-feature" class="crash-summary__feature"></span>
+        </blockquote>
+
+        <form id="crash-form" class="crash-form" autocomplete="off" novalidate>
+          <label class="crash-field">
+            <span class="crash-field__label">
+              What were you doing?
+              <span class="crash-field__hint">optional — helps us reproduce</span>
+            </span>
+            <textarea
+              id="user-note"
+              name="user-note"
+              rows="5"
+              maxlength="1000"
+              placeholder="e.g. Building :app:assembleDebug after switching variants"
+            ></textarea>
+          </label>
+
+          <div class="crash-actions">
+            <button type="submit" id="submit-btn" class="button button--primary crash-btn">
+              <span class="icon icon--btn" aria-hidden="true">send</span>
+              <span>Submit report</span>
+            </button>
+            <a class="button button--ghost crash-btn" href="/">
+              <span class="icon icon--btn" aria-hidden="true">close</span>
+              <span>Cancel</span>
+            </a>
+          </div>
+
+          <p id="status" class="crash-status" role="status" aria-live="polite"></p>
+        </form>
+
+        <details class="crash-details">
+          <summary>What gets submitted?</summary>
+          <p class="crash-details__lead">
+            The extension already strips home-directory paths, hostnames, IPs and long hex / UUID strings on your machine
+            before opening this page. The fields below are exactly what will be sent — review and close this tab if anything
+            still looks too sensitive.
+          </p>
+
+          <dl class="crash-meta">
+            <div><dt>Extension</dt><dd id="meta-ext-version">—</dd></div>
+            <div><dt>VS Code</dt><dd id="meta-vscode-version">—</dd></div>
+            <div><dt>OS</dt><dd id="meta-os">—</dd></div>
+            <div><dt>Node</dt><dd id="meta-node-version">—</dd></div>
+            <div><dt>Feature</dt><dd id="meta-feature">—</dd></div>
+            <div><dt>Fingerprint</dt><dd id="meta-fingerprint">—</dd></div>
+            <div><dt>Captured at</dt><dd id="meta-ts">—</dd></div>
+          </dl>
+
+          <div class="crash-readonly">
+            <h3 class="crash-readonly__title">Error</h3>
+            <pre id="error-readonly" class="crash-readonly__pre"></pre>
+          </div>
+        </details>
+      </div>
+    </main>
+
+    <script src="crash.js" defer></script>
+  </body>
+</html>
