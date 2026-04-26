@@ -7,7 +7,7 @@
     <title>Android Gradle Tools — Own the Android inner loop in VS Code</title>
     <meta
       name="description"
-      content="Gradle tasks, ADB, APK install in VS Code — stay in one editor with your AI agent, no Android Studio round-trips. One surface for code, agents, and the Android loop."
+      content="Gradle, ADB, install, Logcat, JDWP debug, remote ADB bridge — drive the Android inner loop from VS Code & Cursor without Android Studio round-trips."
     />
     <meta name="application-name" content="Android Gradle Tools" />
     <meta name="keywords" content="Android, VS Code, Gradle, ADB, APK, Android Studio alternative, Android development, VSCode extension, Kotlin, Android build, Android debug, Android emulator, install APK, Gradle tasks, Android tools, Visual Studio Code Android, Android SDK, Android NDK, adb shell, adb logcat, build APK, debug APK, Android run configuration, Android device, connected device, wireless ADB, ADB over WiFi, Android build tools, Android Gradle plugin, AGP, Jetpack, Compose, Android CI, Android automation, mobile development, Android open source, MIT license, free Android tools, Android productivity, VS Code mobile, Android workspace, multi-module Android, Android monorepo, Gradle wrapper, gradlew, Android lint, Android test, instrumented test, Android unit test, adb install, adb uninstall, Android Studio replacement, lightweight Android IDE, Android developer tools, Android extension pack" />
@@ -19,7 +19,7 @@
     <meta property="og:title" content="Android Gradle Tools — Android inner loop in VS Code" />
     <meta
       property="og:description"
-      content="Gradle tasks, ADB, and install flows in VS Code — open source, distributed via the Visual Studio Marketplace."
+      content="Gradle tasks, ADB, install, Logcat, JDWP debug, remote ADB over WebSocket, release signing — Android side panel for VS Code & Cursor. Open source, MIT."
     />
     <meta property="og:url" content="https://androidgradletools.org/" />
     <meta property="og:locale" content="en_US" />
@@ -29,7 +29,7 @@
     <meta name="twitter:title" content="Android Gradle Tools — VS Code extension" />
     <meta
       name="twitter:description"
-      content="Gradle, ADB, and installs from the editor. Open source (MIT), published on the VS Code Marketplace."
+      content="Gradle, ADB, install, Logcat, JDWP debug, remote ADB — Android inner loop in VS Code. MIT, on the Marketplace."
     />
     <meta name="twitter:image" content="https://raw.githubusercontent.com/cuongnv126/android-ide-extension/main/media/screenshots/overview.webp" />
     <link rel="icon" type="image/png" href="favicon.png" />
@@ -59,12 +59,16 @@
         "keywords": "Android, VS Code, Gradle, ADB, APK, Kotlin, Android build, Android debug, Android emulator, VSCode extension, Android SDK, AGP, Jetpack Compose, adb logcat, wireless ADB, Android Studio alternative, Gradle wrapper, Android lint, Android test, mobile development",
         "screenshot": "https://raw.githubusercontent.com/cuongnv126/android-ide-extension/main/media/screenshots/overview.webp",
         "featureList": [
-          "Run Gradle tasks from VS Code",
-          "ADB device management",
-          "APK install and uninstall",
-          "Android emulator control",
-          "Build variant selection",
-          "Logcat integration"
+          "Gradle tasks from the side panel",
+          "Build variants picker",
+          "Live ADB device picker",
+          "Build → install → launch",
+          "Logcat with regex filters",
+          "APK cache browser",
+          "JDWP debugger attach",
+          "Remote ADB over WebSocket",
+          "Release signing scaffold",
+          "Isolated Gradle daemon control"
         ]
       }
     </script>
@@ -140,7 +144,7 @@
           <li class="trust-strip__metric">
             <span class="icon trust-strip__metric-icon" aria-hidden="true">download</span>
             <span class="trust-strip__metric-stack">
-              <span class="trust-strip__metric-value">50+</span>
+              <span class="trust-strip__metric-value">200+</span>
               <span class="trust-strip__metric-label">Installs</span>
             </span>
           </li>
@@ -336,7 +340,15 @@
                   <span class="icon icon--card icon--jb" aria-hidden="true">playlist_add_check</span>
                   <h3>Gradle, navigable</h3>
                 </div>
-                <p>Browse Gradle tasks in the UI — less archaeology, more shipping.</p>
+                <p>Browse Gradle tasks in the side panel — assemble, install, clean, sync without leaving the editor.</p>
+              </article>
+              <article class="card">
+                <div class="card__accent card__accent--jb"></div>
+                <div class="card__head">
+                  <span class="icon icon--card icon--jb" aria-hidden="true">layers</span>
+                  <h3>Variants, picked</h3>
+                </div>
+                <p>Discover build variants and modules from Gradle. Pick the active variant or root from a quickpick.</p>
               </article>
               <article class="card">
                 <div class="card__accent card__accent--ad"></div>
@@ -344,23 +356,63 @@
                   <span class="icon icon--card icon--ad" aria-hidden="true">smartphone</span>
                   <h3>Targets, unambiguous</h3>
                 </div>
-                <p>Pick devices and emulators with enough context to choose on purpose.</p>
+                <p>Live device + emulator picker with auto-selection. Status bar shows the active install target.</p>
               </article>
               <article class="card">
                 <div class="card__accent card__accent--mix"></div>
                 <div class="card__head">
                   <span class="icon icon--card icon--mix" aria-hidden="true">install_mobile</span>
-                  <h3>Build → install, relentless</h3>
+                  <h3>Build → install → launch</h3>
                 </div>
-                <p>Tight loop: build, push, verify — repeat until it runs on hardware.</p>
+                <p>Tight loop — build, push to device, launch the app. Repeat until it runs.</p>
               </article>
               <article class="card">
                 <div class="card__accent card__accent--jb"></div>
                 <div class="card__head">
-                  <span class="icon icon--card icon--jb" aria-hidden="true">radar</span>
-                  <h3>Projects, detected</h3>
+                  <span class="icon icon--card icon--jb" aria-hidden="true">terminal</span>
+                  <h3>Logcat, integrated</h3>
                 </div>
-                <p>Android Gradle projects surface with sane defaults for normal repos.</p>
+                <p>Live device logs with regex filters, level coloring, package filter, and persistent column settings.</p>
+              </article>
+              <article class="card">
+                <div class="card__accent card__accent--ad"></div>
+                <div class="card__head">
+                  <span class="icon icon--card icon--ad" aria-hidden="true">archive</span>
+                  <h3>APK cache, browseable</h3>
+                </div>
+                <p>Re-install previous build outputs from a cache. Clean it on demand.</p>
+              </article>
+              <article class="card">
+                <div class="card__accent card__accent--mix"></div>
+                <div class="card__head">
+                  <span class="icon icon--card icon--mix" aria-hidden="true">bug_report</span>
+                  <h3>Debug, attached</h3>
+                </div>
+                <p>Attach the JDWP debugger to a running process via local port forwarding. Source-mapped breakpoints out of the box.</p>
+              </article>
+              <article class="card">
+                <div class="card__accent card__accent--jb"></div>
+                <div class="card__head">
+                  <span class="icon icon--card icon--jb" aria-hidden="true">globe</span>
+                  <h3>Remote ADB, bridged</h3>
+                </div>
+                <p>Connect to a phone over a WebSocket relay — wireless, remote LAN, or paired companion app.</p>
+              </article>
+              <article class="card">
+                <div class="card__accent card__accent--ad"></div>
+                <div class="card__head">
+                  <span class="icon icon--card icon--ad" aria-hidden="true">key</span>
+                  <h3>Release signing, scaffolded</h3>
+                </div>
+                <p>Guided setup writes signingConfigs blocks into your build.gradle. Local-override flow keeps secrets out of the repo.</p>
+              </article>
+              <article class="card">
+                <div class="card__accent card__accent--mix"></div>
+                <div class="card__head">
+                  <span class="icon icon--card icon--mix" aria-hidden="true">stop_circle</span>
+                  <h3>Daemons, contained</h3>
+                </div>
+                <p>Isolated GRADLE_USER_HOME so editor builds don't fight Studio. Auto-stop idle daemons after N minutes.</p>
               </article>
             </div>
           </div>
@@ -435,7 +487,9 @@
             <li><span class="icon icon--tag" aria-hidden="true">integration_instructions</span>AGP workflows</li>
             <li><span class="icon icon--tag" aria-hidden="true">construction</span>Gradle builds</li>
             <li><span class="icon icon--tag" aria-hidden="true">usb</span>Android SDK + ADB</li>
-            <li><span class="icon icon--tag" aria-hidden="true">view_quilt</span>Visual Studio Code</li>
+            <li><span class="icon icon--tag" aria-hidden="true">view_quilt</span>VS Code 1.85+</li>
+            <li><span class="icon icon--tag" aria-hidden="true">view_quilt</span>Cursor</li>
+            <li><span class="icon icon--tag" aria-hidden="true">bug_report</span>Java / Kotlin breakpoints</li>
           </ul>
         </div>
       </section>

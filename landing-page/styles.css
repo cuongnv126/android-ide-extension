@@ -2174,6 +2174,30 @@ section:has(#capabilities-heading).is-visible .grid--arsenal .card:nth-child(4) 
   animation-delay: 0.23s;
 }
 
+section:has(#capabilities-heading).is-visible .grid--arsenal .card:nth-child(5) {
+  animation-delay: 0.29s;
+}
+
+section:has(#capabilities-heading).is-visible .grid--arsenal .card:nth-child(6) {
+  animation-delay: 0.35s;
+}
+
+section:has(#capabilities-heading).is-visible .grid--arsenal .card:nth-child(7) {
+  animation-delay: 0.41s;
+}
+
+section:has(#capabilities-heading).is-visible .grid--arsenal .card:nth-child(8) {
+  animation-delay: 0.47s;
+}
+
+section:has(#capabilities-heading).is-visible .grid--arsenal .card:nth-child(9) {
+  animation-delay: 0.53s;
+}
+
+section:has(#capabilities-heading).is-visible .grid--arsenal .card:nth-child(10) {
+  animation-delay: 0.59s;
+}
+
 @keyframes agt-card-rise {
   from {
     opacity: 0;
@@ -2437,4 +2461,1351 @@ html.agt-js section.cta[data-reveal].is-visible .cta-actions .button:nth-child(2
   .button:active {
     transform: none;
   }
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+ * Refinement layer — depth, surfaces, micro-interactions.
+ * Appended on top of base rules so each override is one cascade level deep.
+ * ────────────────────────────────────────────────────────────────────── */
+
+/* — Cards — gradient surface, layered shadow, accent glow on hover ───── */
+.card {
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafd 100%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 1) inset,
+    0 0 0 1px rgba(15, 23, 42, 0.02),
+    0 1px 2px rgba(15, 23, 42, 0.04),
+    0 8px 22px rgba(15, 23, 42, 0.05);
+  transition:
+    background 0.22s ease,
+    border-color 0.22s ease,
+    transform 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.24s ease;
+}
+
+.card:hover {
+  background: linear-gradient(180deg, #ffffff 0%, #f3f7fc 100%);
+  border-color: rgba(29, 99, 216, 0.22);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 1) inset,
+    0 0 0 1px rgba(29, 99, 216, 0.18),
+    0 4px 8px rgba(15, 23, 42, 0.06),
+    0 18px 40px rgba(29, 99, 216, 0.10);
+}
+
+.card__accent {
+  height: 2px;
+  transition: height 0.22s ease, opacity 0.22s ease, filter 0.22s ease;
+}
+
+.card:hover .card__accent {
+  height: 4px;
+  opacity: 1;
+  filter: brightness(1.05) saturate(1.1);
+}
+
+/* Card head — icon disc + tighter title rhythm */
+.card__head {
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 0;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--jb-border-subtle);
+}
+
+.icon--card {
+  width: 2.05rem;
+  height: 2.05rem;
+  border-radius: 0.55rem;
+  background: linear-gradient(180deg, #ffffff 0%, #eef2f7 100%);
+  border: 1px solid var(--jb-border);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 1) inset,
+    0 1px 2px rgba(15, 23, 42, 0.05);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  flex-shrink: 0;
+  transition: border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.card:hover .icon--card {
+  border-color: rgba(29, 99, 216, 0.28);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 1) inset,
+    0 0 0 3px rgba(29, 99, 216, 0.08),
+    0 2px 4px rgba(15, 23, 42, 0.05);
+}
+
+.card__head h3 {
+  letter-spacing: -0.012em;
+}
+
+.card p {
+  padding-top: 0.7rem;
+}
+
+/* — Hero IDE window — outer halo + softer surface ─────────────────────── */
+.ide-window {
+  position: relative;
+  background: linear-gradient(180deg, #ffffff 0%, #f3f6fb 100%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.95) inset,
+    0 0 0 1px rgba(15, 23, 42, 0.04),
+    0 2px 4px rgba(15, 23, 42, 0.04),
+    0 24px 48px rgba(15, 23, 42, 0.07),
+    0 56px 100px -22px rgba(15, 23, 42, 0.12);
+}
+
+.ide-window::before {
+  content: "";
+  position: absolute;
+  top: -8%;
+  left: 6%;
+  right: 6%;
+  height: 55%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(29, 99, 216, 0.07) 0%, transparent 65%);
+  z-index: -1;
+  pointer-events: none;
+  filter: blur(22px);
+}
+
+.ide-window--motion[data-motion="hero"]:hover {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.95) inset,
+    0 0 0 1px rgba(29, 99, 216, 0.16),
+    0 4px 8px rgba(15, 23, 42, 0.05),
+    0 28px 56px rgba(15, 23, 42, 0.08),
+    0 64px 110px -22px rgba(29, 99, 216, 0.15);
+}
+
+/* Pipeline arrow — flowing dot animation */
+.hero-pipeline__arrow {
+  position: relative;
+  width: 1.6rem;
+  height: 0.8rem;
+  font-size: 0;
+  overflow: hidden;
+}
+
+.hero-pipeline__arrow::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(15, 23, 42, 0.18) 50%, transparent 100%);
+  transform: translateY(-50%);
+}
+
+.hero-pipeline__arrow::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--jb-blue);
+  box-shadow: 0 0 8px rgba(29, 99, 216, 0.6);
+  transform: translate(-50%, -50%);
+  animation: pipeline-flow 2.6s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+.hero-pipeline > :nth-child(4)::after {
+  animation-delay: 1.3s;
+}
+
+@keyframes pipeline-flow {
+  0%   { left: 0; opacity: 0; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-pipeline__arrow::after {
+    animation: none;
+    left: 50%;
+    opacity: 0.6;
+  }
+}
+
+/* — Section heading index — number only, quiet mono ─────────────────── */
+.section-heading__index {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  color: var(--jb-text-dim);
+  opacity: 1;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
+
+/* — Trust strip metrics — refined pill surface, tabular numerals ─────── */
+.trust-strip__metric {
+  background: linear-gradient(180deg, #ffffff 0%, #f4f7fc 100%);
+  border-color: var(--jb-border);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 1) inset,
+    0 0 0 1px rgba(15, 23, 42, 0.02),
+    0 1px 2px rgba(15, 23, 42, 0.04),
+    0 4px 10px rgba(15, 23, 42, 0.04);
+}
+
+.trust-strip__metric-value {
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  letter-spacing: -0.022em;
+}
+
+/* — Buttons — refined press depth ────────────────────────────────────── */
+.button--primary {
+  letter-spacing: -0.005em;
+}
+
+.button--ghost {
+  background: linear-gradient(180deg, #ffffff 0%, #f6f8fc 100%);
+}
+
+.button:active {
+  filter: brightness(0.97);
+}
+
+/* — Section transitions ──────────────────────────────────────────────── */
+.section + .section {
+  /* Softer transition between contrast bands. */
+  isolation: isolate;
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+ * Refinement layer 2 — finer details: glass surfaces, pillar hover,
+ * workflow micro-interactions, ambient bg drift. Append-only.
+ * ────────────────────────────────────────────────────────────────────── */
+
+/* — Hero badges — glass pill effect ──────────────────────────────────── */
+.badge {
+  position: relative;
+  background-clip: padding-box;
+  backdrop-filter: blur(10px) saturate(1.1);
+  -webkit-backdrop-filter: blur(10px) saturate(1.1);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.7) inset,
+    0 1px 2px rgba(15, 23, 42, 0.04);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.badge--jb {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(29, 99, 216, 0.08) 100%);
+}
+
+.badge--android {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(10, 159, 97, 0.08) 100%);
+}
+
+.badge--neutral {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(15, 23, 42, 0.04) 100%);
+}
+
+.hero-badges:hover .badge {
+  transform: translateY(-1px);
+}
+
+/* — Hero title accent — subtle radial glow behind gradient text ──────── */
+.hero-title__accent {
+  position: relative;
+  background: linear-gradient(120deg, var(--jb-blue) 0%, #5a9cff 45%, var(--ad-green) 100%);
+  background-size: 180% 180%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: hero-accent-shimmer 8s ease-in-out infinite;
+}
+
+@keyframes hero-accent-shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-title__accent {
+    animation: none;
+  }
+}
+
+/* — Value strip pillars — hover lift + accent border ─────────────────── */
+.value-strip__item {
+  transition:
+    border-color 0.22s ease,
+    transform 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.24s ease;
+  cursor: default;
+}
+
+.value-strip__item:hover {
+  transform: translateY(-2px);
+  border-color: rgba(29, 99, 216, 0.22);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.95) inset,
+    0 1px 2px rgba(15, 23, 42, 0.04),
+    0 14px 32px rgba(29, 99, 216, 0.08);
+}
+
+.value-strip__icon-wrap {
+  position: relative;
+  background: linear-gradient(145deg, #ffffff 0%, #eef2f7 100%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 1) inset,
+    0 1px 2px rgba(15, 23, 42, 0.05);
+  transition: box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.value-strip__item:hover .value-strip__icon-wrap {
+  border-color: rgba(29, 99, 216, 0.28);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 1) inset,
+    0 0 0 3px rgba(29, 99, 216, 0.08),
+    0 2px 4px rgba(15, 23, 42, 0.05);
+}
+
+/* — Workflow steps — interactive disc + active highlight ─────────────── */
+.workflow-steps__inner {
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafd 100%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 1) inset,
+    0 1px 2px rgba(15, 23, 42, 0.04);
+  transition:
+    transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.workflow-steps li:hover .workflow-steps__inner {
+  transform: translateY(-1px);
+  border-color: rgba(29, 99, 216, 0.28);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 1) inset,
+    0 0 0 3px rgba(29, 99, 216, 0.06),
+    0 4px 12px rgba(29, 99, 216, 0.10);
+}
+
+.workflow-steps li:hover .icon--wf {
+  color: var(--jb-blue);
+  opacity: 1;
+}
+
+.icon--wf {
+  transition: color 0.18s ease, opacity 0.18s ease;
+}
+
+/* Arrow between steps — slightly more refined */
+.workflow-steps li:not(:last-child)::after {
+  font-size: 0.85em;
+  opacity: 0.4;
+  transition: transform 0.2s ease, opacity 0.2s ease, color 0.2s ease;
+}
+
+.workflow-steps li:hover:not(:last-child)::after {
+  color: var(--jb-blue);
+  opacity: 0.85;
+  transform: translateX(2px);
+}
+
+/* — Compatibility tags — hover state ─────────────────────────────────── */
+.list--inline-tags li {
+  transition:
+    border-color 0.18s ease,
+    color 0.18s ease,
+    transform 0.18s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.18s ease;
+}
+
+.list--inline-tags li:hover {
+  border-color: rgba(29, 99, 216, 0.32);
+  color: var(--jb-text);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(29, 99, 216, 0.08);
+}
+
+.list--inline-tags li:hover .icon--tag {
+  color: var(--jb-blue);
+}
+
+.icon--tag {
+  transition: color 0.18s ease;
+}
+
+/* — Trust strip items — interactive states ───────────────────────────── */
+.trust-strip__item {
+  transition: color 0.18s ease;
+}
+
+.trust-strip__item:hover .trust-strip__icon {
+  color: var(--jb-blue);
+}
+
+.trust-strip__icon {
+  transition: color 0.18s ease;
+}
+
+.trust-strip__metric {
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.trust-strip__metric:hover {
+  transform: translateY(-1px);
+}
+
+.trust-strip__metric:hover .trust-strip__metric-icon {
+  color: var(--jb-blue);
+}
+
+.trust-strip__metric--rating:hover .trust-strip__metric-icon {
+  color: #f59e0b;
+  filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.4));
+}
+
+.trust-strip__metric-icon {
+  transition: color 0.18s ease, filter 0.18s ease;
+}
+
+/* — Ambient bg drift — gentle motion on the bloom layers ─────────────── */
+@keyframes bg-bloom-drift-a {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50%      { transform: translate3d(2.5%, -1.5%, 0); }
+}
+
+@keyframes bg-bloom-drift-b {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50%      { transform: translate3d(-2%, 1.5%, 0); }
+}
+
+.page-bg__bloom--blue {
+  animation: bg-bloom-drift-a 38s ease-in-out infinite;
+  will-change: transform;
+}
+
+.page-bg__bloom--green {
+  animation: bg-bloom-drift-b 42s ease-in-out infinite;
+  will-change: transform;
+}
+
+.page-bg__bloom--violet {
+  animation: bg-bloom-drift-a 46s ease-in-out infinite reverse;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-bg__bloom--blue,
+  .page-bg__bloom--green,
+  .page-bg__bloom--violet {
+    animation: none;
+  }
+}
+
+/* — Inline code — refined chip look ──────────────────────────────────── */
+.inline-code {
+  position: relative;
+  font-family: var(--font-mono);
+  font-size: 0.86em;
+  padding: 0.08em 0.4em;
+  border-radius: 6px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, var(--jb-bg-input) 100%);
+  border: 1px solid var(--jb-border-subtle);
+  color: var(--jb-text);
+  letter-spacing: -0.005em;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.85) inset;
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+ * Refinement layer 3 — final polish: ambient surfaces, micro-details,
+ * accessibility, and the "wow" small things you only feel on a 2nd visit.
+ * ────────────────────────────────────────────────────────────────────── */
+
+/* — ::selection — subtle blue tint with proper contrast ──────────────── */
+::selection {
+  background: rgba(29, 99, 216, 0.18);
+  color: var(--jb-text);
+}
+
+/* — Custom focus ring (accessible + brand-aligned) ───────────────────── */
+:focus-visible {
+  outline: 2px solid var(--jb-focus);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+a:focus-visible,
+.button:focus-visible,
+.site-nav__link:focus-visible {
+  border-radius: var(--radius-sm);
+}
+
+/* — Sticky header — refined backdrop + bottom hairline ───────────────── */
+.site-top {
+  background:
+    linear-gradient(180deg, rgba(252, 253, 255, 0.96) 0%, rgba(248, 250, 253, 0.92) 100%);
+  backdrop-filter: blur(14px) saturate(1.15);
+  -webkit-backdrop-filter: blur(14px) saturate(1.15);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.92) inset,
+    0 1px 0 rgba(15, 23, 42, 0.04);
+  border-bottom-color: transparent;
+}
+
+/* — Site nav links — underline grow on hover (replace ::after dot) ───── */
+.site-nav__link:not(.site-nav__link--cta) {
+  position: relative;
+  transition: color 0.18s ease;
+}
+
+.site-nav__link:not(.site-nav__link--cta)::after {
+  content: "";
+  position: absolute;
+  left: 0.4rem;
+  right: 0.4rem;
+  bottom: -2px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--jb-blue), transparent);
+  opacity: 0;
+  transform: scaleX(0.4);
+  transition: opacity 0.2s ease, transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.site-nav__link:not(.site-nav__link--cta):hover::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.site-nav__link--cta {
+  background: linear-gradient(180deg, #ffffff 0%, #f3f6fb 100%);
+  border-radius: 999px;
+  padding: 0.42rem 0.95rem;
+  border: 1px solid var(--jb-border);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.95) inset,
+    0 1px 2px rgba(15, 23, 42, 0.04);
+  transition:
+    transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.site-nav__link--cta:hover {
+  transform: translateY(-1px);
+  border-color: rgba(29, 99, 216, 0.3);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 1) inset,
+    0 0 0 3px rgba(29, 99, 216, 0.06),
+    0 4px 12px rgba(29, 99, 216, 0.10);
+}
+
+/* — Trust-strip text items — match metric pill quality ───────────────── */
+.trust-strip__item {
+  position: relative;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(244, 247, 252, 0.7) 100%);
+  border: 1px solid var(--jb-border-subtle);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: border-color 0.18s ease, transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.trust-strip__item:hover {
+  transform: translateY(-1px);
+  border-color: rgba(29, 99, 216, 0.22);
+}
+
+/* — Section heading — refined hairline (gradient fade) ───────────────── */
+.section-heading {
+  border-bottom: 0;
+  position: relative;
+  padding-bottom: 0.85rem;
+}
+
+.section-heading::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--hairline) 12%,
+    var(--hairline) 88%,
+    transparent 100%
+  );
+}
+
+.section-heading--center::after {
+  left: 20%;
+  right: 20%;
+}
+
+/* — Cards — aurora shimmer on hover (subtle gradient sweep) ──────────── */
+.card {
+  overflow: hidden;
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.55) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+  transform: skewX(-12deg);
+  transition: left 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card:hover::after {
+  left: 130%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card::after {
+    display: none;
+  }
+}
+
+/* — IDE window titlebar dots — refined gradients ─────────────────────── */
+.ide-window__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.3) inset,
+    0 0 0 1px rgba(15, 23, 42, 0.08);
+}
+
+.ide-window__dot--r {
+  background: linear-gradient(180deg, #ff6859 0%, #d3392c 100%);
+}
+
+.ide-window__dot--y {
+  background: linear-gradient(180deg, #ffd34a 0%, #d6a005 100%);
+}
+
+.ide-window__dot--g {
+  background: linear-gradient(180deg, #5cd06a 0%, #1e9c34 100%);
+}
+
+/* — Subtle scroll-driven IDE window parallax (zero-cost: transform only) ─ */
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+  .ide-window--motion[data-motion="hero"] {
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+  }
+  .site-header:hover .ide-window--motion[data-motion="hero"] {
+    transform: translateY(-3px);
+  }
+}
+
+/* — Footer brand link — match header behaviour (plain blue on hover) ─── */
+.footer-brand__name {
+  transition: color 0.18s ease;
+}
+
+.footer-brand__logo:hover .footer-brand__name {
+  color: var(--jb-blue);
+}
+
+/* — Workflow rail — refined surface (replace flat input bg) ──────────── */
+.workflow-rail {
+  background: linear-gradient(180deg, #f8fafd 0%, #eef2f7 100%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.85) inset,
+    0 1px 2px rgba(15, 23, 42, 0.03);
+}
+
+.workflow-rail__track {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(29, 99, 216, 0.18),
+    rgba(10, 159, 97, 0.18),
+    transparent
+  );
+  background-size: 220% 100%;
+}
+
+/* — Arsenal grid — refine surrounding container ──────────────────────── */
+.grid--arsenal {
+  background: linear-gradient(180deg, #f4f7fc 0%, #eaeff7 100%);
+  border-color: var(--jb-border);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.95) inset,
+    0 1px 2px rgba(15, 23, 42, 0.03);
+}
+
+/* — Page-bg vignette — softer, more atmospheric ──────────────────────── */
+.page-bg__vignette {
+  background: radial-gradient(
+    ellipse 110% 95% at 50% 42%,
+    transparent 0%,
+    transparent 52%,
+    rgba(15, 23, 42, 0.05) 100%
+  );
+}
+
+/* — Refined typography for body emphasis ─────────────────────────────── */
+strong {
+  font-weight: 600;
+  letter-spacing: -0.005em;
+}
+
+/* — Custom scrollbar (Webkit + Firefox) ──────────────────────────────── */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(29, 99, 216, 0.35) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(15, 23, 42, 0.18);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(29, 99, 216, 0.45);
+  background-clip: content-box;
+}
+
+/* — Selection refinement specific to code blocks ─────────────────────── */
+code::selection,
+.inline-code::selection,
+.ide-window *::selection {
+  background: rgba(29, 99, 216, 0.25);
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+ * Refinement layer 5 — small editorial polish. Restraint, restraint, restraint.
+ * Kept under tight cap: no new effects, only sharpening what's already there.
+ * ────────────────────────────────────────────────────────────────────── */
+
+/* — IDE tab LED — soft breath, signals "the file is live" ────────────── */
+@keyframes tab-led-breath {
+  0%, 100% {
+    box-shadow:
+      0 0 0 1px rgba(10, 159, 97, 0.25),
+      0 0 0 0 rgba(10, 159, 97, 0.18);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px rgba(10, 159, 97, 0.35),
+      0 0 0 4px rgba(10, 159, 97, 0);
+  }
+}
+
+.ide-window__tab--active .ide-window__tab-led {
+  animation: tab-led-breath 3.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ide-window__tab--active .ide-window__tab-led {
+    animation: none;
+  }
+}
+
+/* — Hero badges — kerning fine-tune at the small uppercase size ──────── */
+.badge {
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 0, "ss01" 1;
+  letter-spacing: 0.07em;
+}
+
+/* — Hero AI tag — subtle gradient pill instead of flat accent ────────── */
+.hero-ai__tag {
+  background: linear-gradient(180deg, rgba(29, 99, 216, 0.10) 0%, rgba(10, 159, 97, 0.08) 100%);
+  border: 1px solid rgba(29, 99, 216, 0.18);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.85) inset;
+  letter-spacing: 0.06em;
+  font-feature-settings: "kern" 1, "ss01" 1;
+}
+
+/* — Section deck — refined small text under heading ──────────────────── */
+.section-deck {
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  letter-spacing: -0.005em;
+  color: var(--jb-text-dim);
+}
+
+.section-deck strong {
+  color: var(--jb-text);
+  font-weight: 600;
+  letter-spacing: -0.008em;
+}
+
+/* — Lead-in — refined first-line cadence (no drop-cap; just emphasis) ── */
+.lead-in {
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "ss01" 1;
+  letter-spacing: -0.008em;
+}
+
+.lead-in strong {
+  font-weight: 600;
+  color: var(--jb-text);
+  letter-spacing: -0.012em;
+}
+
+/* — Footer brand tagline — finer rhythm ──────────────────────────────── */
+.footer-brand__tagline {
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  letter-spacing: -0.005em;
+  color: var(--jb-text-dim);
+}
+
+.footer-brand__name {
+  letter-spacing: -0.02em;
+  font-feature-settings: "kern" 1, "ss01" 1;
+}
+
+/* — Footer disclaimer — refined editorial label ──────────────────────── */
+.footer-disclaimer {
+  font-feature-settings: "kern" 1, "liga" 1;
+  letter-spacing: -0.003em;
+  line-height: 1.55;
+}
+
+.footer-disclaimer__label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--jb-text-dim);
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
+
+/* — :target — transient highlight when scrolled to via anchor ────────── */
+@keyframes target-flash {
+  0%   { background-color: rgba(29, 99, 216, 0.08); }
+  100% { background-color: transparent; }
+}
+
+.section:target,
+.section[data-reveal]:target {
+  animation: target-flash 1.4s ease-out;
+  border-radius: var(--radius-md);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section:target {
+    animation: none;
+  }
+}
+
+/* — IDE window tabstrip — refined gradient surface ───────────────────── */
+.ide-window__tabstrip {
+  background:
+    linear-gradient(180deg, #ffffff 0%, #f5f8fc 100%);
+  border-bottom-color: rgba(15, 23, 42, 0.06);
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+ * Refinement layer 6 — world-class signals (Linear / Vercel / Stripe DNA).
+ * Editorial typography scale, signature dot overlay, refined hero rhythm,
+ * scroll-progress indicator, sophisticated card sequencing.
+ * ────────────────────────────────────────────────────────────────────── */
+
+/* — Hero title — editorial display scale ─────────────────────────────── */
+.hero-title {
+  font-size: clamp(2.05rem, 5.2vw, 3.4rem);
+  letter-spacing: -0.045em;
+  line-height: 1.05;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.hero-title__accent {
+  letter-spacing: -0.05em;
+}
+
+.hero-kicker {
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  margin-bottom: 0.65rem;
+}
+
+.lead {
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  line-height: 1.55;
+  font-weight: 450;
+  max-width: min(64ch, 100%);
+  letter-spacing: -0.005em;
+}
+
+/* — Hero AI tag — refined editorial chip ─────────────────────────────── */
+.hero-ai {
+  font-size: 0.92rem;
+  letter-spacing: -0.005em;
+  margin-top: 1rem;
+  line-height: 1.55;
+}
+
+.hero-ai__tag {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  padding: 0.22em 0.7em;
+  margin-right: 0.55em;
+  border-radius: 999px;
+}
+
+/* — Hero pipeline — refined editorial track ──────────────────────────── */
+.hero-pipeline {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--hairline);
+}
+
+.hero-pipeline__step {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--jb-text);
+  font-feature-settings: "tnum" 1, "lnum" 1, "ss01" 1;
+}
+
+/* — Vercel-signature dot overlay — sits above mesh, below content ────── */
+.page-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    rgba(15, 23, 42, 0.10) 1px,
+    transparent 1px
+  );
+  background-size: 24px 24px;
+  background-position: 0 0;
+  mask-image: radial-gradient(
+    ellipse 70% 75% at 50% 35%,
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0.18) 50%,
+    transparent 80%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 70% 75% at 50% 35%,
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0.18) 50%,
+    transparent 80%
+  );
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+/* Hide the existing line grid — dots replace it as the signature pattern.
+ * Lines + dots together is busy; pick one. */
+.page-bg__grid {
+  opacity: 0.18;
+  background-size: 96px 96px;
+}
+
+/* — Scroll progress bar — thin gradient line at top of viewport ──────── */
+@supports (animation-timeline: scroll()) {
+  .site-top::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 1.5px;
+    background: linear-gradient(
+      90deg,
+      var(--jb-blue) 0%,
+      var(--ad-green) 100%
+    );
+    transform-origin: left center;
+    animation: scroll-progress linear;
+    animation-timeline: scroll(root);
+  }
+  @keyframes scroll-progress {
+    0%   { transform: scaleX(0); }
+    100% { transform: scaleX(1); }
+  }
+}
+
+/* — Section vertical rhythm — bigger gaps for editorial feel ─────────── */
+.section {
+  padding-block: clamp(2.4rem, 5vw, 3.5rem);
+}
+
+.section + .section {
+  /* Subtle hairline with gradient fade on band-to-band transitions. */
+  position: relative;
+}
+
+/* — Card font rendering — display optimization at small size ─────────── */
+.card__head h3 {
+  letter-spacing: -0.02em;
+  font-feature-settings: "kern" 1, "liga" 1, "ss01" 1;
+}
+
+.card p {
+  font-size: 0.91rem;
+  letter-spacing: -0.003em;
+  line-height: 1.55;
+  color: var(--jb-text-dim);
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+}
+
+/* — Trust strip — refined editorial cadence ──────────────────────────── */
+.trust-strip__list {
+  font-size: 0.875rem;
+  letter-spacing: -0.005em;
+}
+
+.trust-strip__metric-value {
+  font-size: 0.85rem;
+}
+
+.trust-strip__metric-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+}
+
+
+/* — Section heading — bigger world-class display ─────────────────────── */
+.section-heading {
+  font-size: clamp(1.2rem, 2.3vw, 1.55rem);
+  letter-spacing: -0.025em;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.95rem;
+  font-feature-settings: "kern" 1, "liga" 1, "ss01" 1;
+}
+
+/* — Lead-in — display weight at section opener ───────────────────────── */
+.lead-in {
+  font-size: clamp(1.05rem, 1.6vw, 1.18rem);
+  font-weight: 500;
+  letter-spacing: -0.012em;
+  line-height: 1.5;
+  color: var(--jb-text);
+  margin-bottom: 1.1rem;
+}
+
+.section-deck {
+  font-size: 1rem;
+  letter-spacing: -0.006em;
+}
+
+/* — Buttons — refined outline width on focus for accessibility weight ── */
+.button:focus-visible {
+  outline-width: 2px;
+  outline-offset: 3px;
+  outline-color: var(--jb-focus);
+}
+
+/* — Print — strip motion + bg, optimize for paper ────────────────────── */
+@media print {
+  :root {
+    --jb-bg: #fff;
+    --jb-bg-elevated: #fff;
+    --jb-bg-input: #fff;
+  }
+  .page-bg,
+  .site-top,
+  .ide-window--motion,
+  [data-reveal] {
+    animation: none !important;
+    transition: none !important;
+  }
+  .card,
+  .value-strip__item,
+  .workflow-rail,
+  .grid--arsenal {
+    background: #fff !important;
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+  }
+  .button {
+    border: 1px solid #999 !important;
+    background: #fff !important;
+    color: #000 !important;
+  }
+  .badge,
+  .trust-strip__item,
+  .trust-strip__metric {
+    background: #fff !important;
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+  }
+  /* Make external links visible on paper. */
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    color: #666;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+ * Refinement layer 4 — premium details. Restraint over noise.
+ * Conic gradient borders, breath animations, opentype, anchor margins,
+ * fade-mask edges, subtle 3D, refined easing scale.
+ * ────────────────────────────────────────────────────────────────────── */
+
+/* — Custom easing scale (named for clarity) ──────────────────────────── */
+:root {
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring:   cubic-bezier(0.34, 1.4, 0.64, 1);
+  --ease-back:     cubic-bezier(0.45, 1.45, 0.55, 1);
+}
+
+/* — Opentype features for natural typography ─────────────────────────── */
+html {
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "ss01" 1;
+  text-rendering: optimizeLegibility;
+}
+
+.hero-title,
+.section-heading,
+.crash-fallback__title,
+.crash-summary__name,
+.value-strip__manifesto,
+h1, h2, h3 {
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "ss01" 1;
+}
+
+/* Tabular numerals only where digits should align — code, metrics, mono */
+.inline-code,
+code,
+.ide-window,
+.trust-strip__metric-value,
+.section-heading__index {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* — Sticky-nav anchor offset — section IDs scroll past header ────────── */
+:target,
+[id] {
+  scroll-margin-top: 5rem;
+}
+
+/* — Hero primary CTA — soft hover halo (no conic; mask-composite was unreliable) ─ */
+section.cta .button--primary {
+  position: relative;
+  isolation: isolate;
+}
+
+section.cta .button--primary::after {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(circle at 50% 60%, rgba(29, 99, 216, 0.3) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.32s ease;
+  pointer-events: none;
+}
+
+section.cta .button--primary:hover::after {
+  opacity: 1;
+}
+
+/* — IDE active activity node — gentle pulse ──────────────────────────── */
+@keyframes activity-breath {
+  0%, 100% {
+    box-shadow:
+      0 0 0 1px rgba(29, 99, 216, 0.22),
+      0 1px 2px rgba(29, 99, 216, 0.12),
+      0 0 0 0 rgba(29, 99, 216, 0.18);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px rgba(29, 99, 216, 0.32),
+      0 1px 4px rgba(29, 99, 216, 0.20),
+      0 0 0 6px rgba(29, 99, 216, 0);
+  }
+}
+
+.ide-window__activity-node--active {
+  animation: activity-breath 3.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ide-window__activity-node--active {
+    animation: none;
+  }
+}
+
+/* — Card subtle 3D — perspective offset on hover ─────────────────────── */
+.grid--arsenal .card {
+  transform-origin: center bottom;
+  transform-style: preserve-3d;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .card {
+    transition:
+      background 0.22s ease,
+      border-color 0.22s ease,
+      transform 0.32s var(--ease-out-soft),
+      box-shadow 0.28s ease;
+  }
+  .card:hover {
+    transform: translateY(-3px) scale(1.005);
+  }
+  .card:hover .card__head h3 {
+    transform: translateZ(0.01px); /* GPU promote for crisp text */
+  }
+}
+
+/* — Arsenal — fade mask on horizontal scroll edges ───────────────────── */
+.arsenal-scroll-wrap {
+  position: relative;
+}
+
+.arsenal-scroll-wrap::before,
+.arsenal-scroll-wrap::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2.5rem;
+  pointer-events: none;
+  z-index: 2;
+  border-radius: var(--radius-md);
+}
+
+.arsenal-scroll-wrap::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--jb-bg) 0%, transparent 100%);
+}
+
+.arsenal-scroll-wrap::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--jb-bg) 0%, transparent 100%);
+}
+
+/* — Trust-strip rating star — subtle breath ──────────────────────────── */
+@keyframes star-breath {
+  0%, 100% { filter: drop-shadow(0 0 0 rgba(245, 158, 11, 0)); }
+  50%      { filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.45)); }
+}
+
+.trust-strip__metric--rating .trust-strip__metric-icon {
+  animation: star-breath 4.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trust-strip__metric--rating .trust-strip__metric-icon {
+    animation: none;
+  }
+}
+
+/* — Hero title — refined hierarchy + subtle letter-spacing scale ─────── */
+.hero-title {
+  font-feature-settings: "kern" 1, "liga" 1, "ss01" 1;
+  letter-spacing: -0.038em;
+  line-height: 1.08;
+}
+
+.hero-kicker {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hero-kicker::before {
+  content: "";
+  width: 1.5rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--jb-text-dim));
+  opacity: 0.55;
+}
+
+/* — Refined buttons — micro spring on press ──────────────────────────── */
+.button {
+  transition:
+    background 0.18s ease,
+    color 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.22s var(--ease-back),
+    box-shadow 0.22s ease,
+    filter 0.18s ease;
+}
+
+/* — Hairline rules — refined version of <hr> if used anywhere ────────── */
+hr {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--hairline) 12%,
+    var(--hairline) 88%,
+    transparent
+  );
+  margin: 1.5rem 0;
+}
+
+/* — Smoother scroll snap for arsenal — refined behavior ──────────────── */
+.grid--arsenal {
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 1rem;
+}
+
+.grid--arsenal .card {
+  scroll-snap-align: center;
+}
+
+/* — Anchor links inside body prose — refined underline (skip buttons) ── */
+.section p a:not(.button):not(.site-nav__link),
+.section li a:not(.button):not(.site-nav__link) {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(29, 99, 216, 0.35);
+  transition: text-decoration-color 0.18s ease, color 0.18s ease;
+}
+
+.section p a:not(.button):not(.site-nav__link):hover,
+.section li a:not(.button):not(.site-nav__link):hover {
+  text-decoration-color: var(--jb-blue);
+}
+
+/* Belt-and-braces — buttons must never carry the prose underline. */
+.button,
+.button:hover,
+.button:focus,
+.button:active {
+  text-decoration: none;
+}
+
+/* — Lead — refined first-line emphasis ───────────────────────────────── */
+.lead {
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  letter-spacing: -0.005em;
+}
+
+/* — Refined disabled state across components ─────────────────────────── */
+[disabled],
+[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.6;
+  filter: saturate(0.6);
 }
